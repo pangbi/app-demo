@@ -25,7 +25,7 @@ public class ZooKeeperPropertyPlaceholderConfigurer extends PropertyPlaceholderC
     @Override
     protected void processProperties(ConfigurableListableBeanFactory beanFactoryToProcess, Properties props)
             throws BeansException {
-        log.debug("**************************processProperties************************");
+        log.debug("**************************processProperties*************************");
         try {
             List<String> list = configurationClient.getChildren();
             System.err.println(list);
