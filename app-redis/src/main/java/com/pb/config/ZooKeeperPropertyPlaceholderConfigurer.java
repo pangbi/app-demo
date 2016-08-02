@@ -19,6 +19,7 @@ public class ZooKeeperPropertyPlaceholderConfigurer extends PropertyPlaceholderC
     private ZookeeperClientUtil configurationClient;
 
     public void setConfigurationClient(ZookeeperClientUtil configurationClient) {
+        log.debug("init ZooKeeperPropertyPlaceholderConfigurer");
         this.configurationClient = configurationClient;
     }
 
