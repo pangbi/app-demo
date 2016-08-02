@@ -1,0 +1,1 @@
+use tomcat to start app-redis,app-remote,app-web
