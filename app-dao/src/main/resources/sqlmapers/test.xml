@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--   
+    namespace：必须与对应的接口全类名一致  
+    id:必须与对应接口的某个对应的方法名一致  
+      
+ -->
+<mapper namespace="com.pb.dao.TestDao">
+    <cache type="org.mybatis.caches.memcached.LoggingMemcachedCache"
+           flushInterval="86400000" size="1024000">
+    </cache>
+
+    <resultMap id="BaseResultMap" type="com.pb.bo.TestBo">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+    <select id="list" resultMap="BaseResultMap" useCache="true">
+      		SELECT
+				*  
+			FROM
+				tb_test
+      </select>
+
+    <insert id="save" parameterType="com.pb.bo.TestBo">
+		INSERT INTO tb_test (`name`,remark) VALUES (#{name}, #{remark})
+	</insert>
+</mapper>
