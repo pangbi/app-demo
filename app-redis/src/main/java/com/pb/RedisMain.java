@@ -11,11 +11,10 @@ import redis.clients.jedis.Jedis;
 public class RedisMain {
     public static void main(String args[]) {
         ApplicationContext ac = new ClassPathXmlApplicationContext("root-context.xml");
-        com.alibaba.dubbo.container.Main.main(null);
-        /*RedisFacdeImpl redisFacdeImpl = (RedisFacdeImpl)ac.getBean("redisFacdeImpl");
-        Jedis jedis = redisFacdeImpl.getJedis();
+       // com.alibaba.dubbo.container.Main.main(null);
+        RedisFacdeImpl redisFacdeImpl = (RedisFacdeImpl)ac.getBean("redisFacdeImpl");
         System.out.println("--->");
-        jedis.set("pb","张强");
-        System.out.println(jedis.get("pb"));*/
+        redisFacdeImpl.set("pb","张强");
+        System.out.println((String) redisFacdeImpl.get("pb"));
     }
 }

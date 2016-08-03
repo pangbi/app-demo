@@ -15,25 +15,11 @@
 	<context:component-scan base-package="com.pb.redis"/>
 	<aop:aspectj-autoproxy />
 
-
-	<!-- 用于数据源的参数引用 -->
-	<bean id="propertyConfigurer"
-		  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="order" value="1" />
-		<property name="ignoreResourceNotFound" value="true" />
-		<property name="locations">
-			<list>
-				<value>classpath:redis.properties</value>
-				<value>classpath:dubbo.properties</value>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="zookeeperClient" class="com.pb.config.ZookeeperClientUtil" />
+	<!--<bean id="zkClientUtil" class="com.pb.config.ZkClientUtil" />-->
 
 	<bean id="zooKeeperPropertyPlaceholderConfigurer" class="com.pb.config.ZooKeeperPropertyPlaceholderConfigurer">
-		<property name="configurationClient" ref="zookeeperClient"></property>
-		<property name="order" value="2" />
+		<!--<property name="zkClientUtil" ref="zkClientUtil"></property>-->
+		<property name="order" value="1" />
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
 	</bean>
 

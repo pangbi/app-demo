@@ -16,7 +16,7 @@
         <module>app-remote</module>
         <module>app-web</module>
         <module>app-service</module>
-        <module>app-resource-remote</module>
+        <module>app-resource-manager</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -37,7 +37,7 @@
         <aspectjweaver.version>1.6.8</aspectjweaver.version>
         <netty.version>3.7.0.Final</netty.version>
         <javassist.version>3.20.0-GA</javassist.version>
-        <zkclient.version>0.7</zkclient.version>
+        <zkclient.version>0.9</zkclient.version>
         <javaeeApi.version>7.0</javaeeApi.version>
         <commonsFileupload.version>7.0</commonsFileupload.version>
         <jstl.version>1.2</jstl.version>
