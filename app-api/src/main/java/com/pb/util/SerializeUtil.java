@@ -1,18 +1,17 @@
 package com.pb.util;
 
-import com.alibaba.druid.support.logging.Log;
-import com.alibaba.druid.support.logging.LogFactory;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by zhangqiang on 2016/7/26.
  */
 public class SerializeUtil {
-    static  Log log = LogFactory.getLog(SerializeUtil.class);
+    static  Logger log = LoggerFactory.getLogger(SerializeUtil.class);
     /**
      * 序列化
      *

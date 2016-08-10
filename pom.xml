@@ -27,8 +27,7 @@
         <maven.resources.plugin.version>2.7</maven.resources.plugin.version>
         <maven.javadoc.plugin.version>2.10.3</maven.javadoc.plugin.version>
         <build.jvmArguments>-Xms1024m -Xmx2048m</build.jvmArguments>
-        <build.mainClass>build.mainClass>com.fangkuaiyi.Main</build.mainClass>
-        <org.slf4j.version>1.7.15</org.slf4j.version>
+        <org.slf4j.version>1.7.16</org.slf4j.version>
         <org.log4j2.version>2.5</org.log4j2.version>
         <dubbo.version>2.8.5</dubbo.version>
         <commons.logging.version>1.2</commons.logging.version>
@@ -51,6 +50,8 @@
         <mysql.version>5.1.18</mysql.version>
         <mybatis.memcached.version>1.0.0-beta1</mybatis.memcached.version>
         <jedis.version>2.8.1</jedis.version>
+        <logback.version>1.1.7</logback.version>
+        <logback.ext.spring.version>0.1.4</logback.ext.spring.version>
     </properties>
 
     <dependencyManagement>
@@ -180,6 +181,10 @@
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -249,6 +254,18 @@
                     <artifactId>netty</artifactId>
                     <groupId>org.jboss.netty</groupId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-slf4j-impl</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -267,58 +284,14 @@
             <version>${zkclient.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>log4j</groupId>
-                    <artifactId>log4j</artifactId>
-                </exclusion>
-                <exclusion>
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-log4j12</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
             </exclusions>
-        </dependency>
-
-        <!-- Logging -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${org.slf4j.version}</version>
-        </dependency>
-        <!-- log4j2 -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${org.log4j2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${org.log4j2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-jcl</artifactId>
-            <version>${org.log4j2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-jul</artifactId>
-            <version>${org.log4j2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-1.2-api</artifactId>
-            <version>${org.log4j2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-web</artifactId>
-            <version>2.0.2</version>
-        </dependency>
-        <!-- log4j-slf4j-impl -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>${org.log4j2.version}</version>
         </dependency>
 
         <dependency>
@@ -363,6 +336,67 @@
             <version>${jedis.version}</version>
         </dependency>
 
+
+        <!--logback-->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--spring logback 依赖-->
+        <dependency>
+            <groupId>org.logback-extensions</groupId>
+            <artifactId>logback-ext-spring</artifactId>
+            <version>${logback.ext.spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${org.slf4j.version}</version>
+        </dependency>
+
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${org.slf4j.version}</version>
+        </dependency>
+
+        <!--commons-logging到log4j2的桥梁-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-jcl</artifactId>
+            <version>${org.log4j2.version}</version>
+        </dependency>
+        <!--commons-logging到slf4j的桥梁-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-jul</artifactId>
+            <version>${org.log4j2.version}</version>
+        </dependency>
+
+        <!--Shiro-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+
     </dependencies>
 
 
@@ -376,176 +410,4 @@
     </repositories>
 
 
-    <build>
-        <finalName>${project.artifactId}-${project.version}</finalName>
-
-        <sourceDirectory>src/main/java</sourceDirectory>
-        <testSourceDirectory>src/test/java</testSourceDirectory>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
-        <testResources>
-            <testResource>
-                <directory>src/test/resources</directory>
-            </testResource>
-        </testResources>
-        <outputDirectory>target/classes</outputDirectory>
-        <testOutputDirectory>target/test-classes</testOutputDirectory>
-
-        <plugins>
-            <!-- 编译插件及其jdk版本指定 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler.plugin.version}</version>
-                <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-
-            <!-- 资源文件插件，缺失将无法正常编译资源文件目录 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>${maven.resources.plugin.version}</version>
-                <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven.javadoc.plugin.version}</version>
-                <inherited>false</inherited>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <phase>package</phase>
-                    </execution>
-                </executions>
-                <configuration>
-                    <charset>${project.build.sourceEncoding}</charset>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <docencoding>${project.build.sourceEncoding}</docencoding>
-                    <useStandardDocletOptions>false</useStandardDocletOptions>
-                    <aggregate>true</aggregate>
-                </configuration>
-            </plugin>
-        </plugins>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <configuration>
-                        <excludes>
-                            <exclude>**/*.xml</exclude>
-                            <exclude>**/*.properties</exclude>
-                            <exclude>**/*.cfg</exclude>
-                        </excludes>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>appassembler-maven-plugin</artifactId>
-                    <version>1.8.1</version>
-                    <!--<executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>assemble</goal>
-                            </goals>
-                        </execution>
-                    </executions>-->
-                    <executions>
-                        <execution>
-                            <id>generate-jsw-scripts</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>generate-daemons</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <configurationDirectory>conf</configurationDirectory>
-                        <repositoryLayout>flat</repositoryLayout>
-                        <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
-                        <configurationSourceDirectory>src/main/resources</configurationSourceDirectory>
-                        <copyConfigurationDirectory>true</copyConfigurationDirectory>
-                        <assembleDirectory>${project.build.directory}/${project.artifactId}-${project.version}
-                        </assembleDirectory>
-                        <target>${project.build.directory}</target>
-                        <extraJvmArguments>${build.jvmArguments}</extraJvmArguments>
-                        <logsDirectory>logs</logsDirectory>
-                        <!--<programs>
-                            <program>
-                                <mainClass>${build.mainClass}</mainClass>
-                                <id>${project.artifactId}</id>
-                                <platforms>
-                                    <platform>windows</platform>
-                                    <platform>unix</platform>
-                                </platforms>
-                            </program>
-                        </programs>-->
-
-                        <daemons>
-                            <daemon>
-                                <id>${project.artifactId}</id>
-                                <mainClass>${build.mainClass}</mainClass>
-                                <commandLineArguments>
-                                    <commandLineArgument>start</commandLineArgument>
-                                </commandLineArguments>
-                                <platforms>
-                                    <platform>jsw</platform>
-                                </platforms>
-                                <generatorConfigurations>
-                                    <generatorConfiguration>
-                                        <generator>jsw</generator>
-                                        <includes>
-                                            <include>linux-x86-64</include>
-                                            <!--<include>linux-x86-32</include>
-                                            <include>windows-x86-32</include>
-                                            <include>windows-x86-64</include>-->
-                                        </includes>
-                                        <configuration>
-                                            <property>
-                                                <name>configuration.directory.in.classpath.first</name>
-                                                <value>conf</value>
-                                            </property>
-                                            <property>
-                                                <name>set.default.REPO_DIR</name>
-                                                <value>lib</value>
-                                            </property>
-                                            <property>
-                                                <name>wrapper.logfile</name>
-                                                <value>logs/wrapper-${project.artifactId}.log</value>
-                                            </property>
-                                            <property>
-                                                <name>wrapper.logfile.format</name>
-                                                <value>M</value>
-                                            </property>
-                                        </configuration>
-                                    </generatorConfiguration>
-                                </generatorConfigurations>
-                            </daemon>
-                        </daemons>
-
-                        <repositoryName>lib</repositoryName>
-                        <!--<binFileExtensions>
-                            <unix>.sh</unix>
-                        </binFileExtensions>-->
-                    </configuration>
-
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
 </project>

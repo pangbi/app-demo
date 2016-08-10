@@ -5,8 +5,8 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.pb.bo.TestBo;
 import com.pb.facde.TestFacde;
 import com.pb.service.TestService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.Map;
  */
 @Service(protocol = {"dubbo"})
 public class TestFacdeImpl implements TestFacde {
-    private Log log = LogFactory.getLog(TestFacdeImpl.class);
+    private Logger log = LoggerFactory.getLogger(TestFacdeImpl.class);
 
     @Autowired
     private TestService testService;
@@ -29,17 +29,14 @@ public class TestFacdeImpl implements TestFacde {
         return list;
     }
 
-    @Override
     public int saveData() {
         return testService.saveData();
     }
 
-    @Override
     public String getDataFromRedis() {
         return testService.getDataFromRedis();
     }
 
-    @Override
     public Map<String, Object> reqestAvgTime(){
         return testService.reqestAvgTime();
     }

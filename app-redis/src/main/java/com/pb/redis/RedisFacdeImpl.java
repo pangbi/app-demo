@@ -1,9 +1,11 @@
 package com.pb.redis;
 
-import com.alibaba.druid.support.logging.Log;
-import com.alibaba.druid.support.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.pb.facde.RedisFacde;
+import com.pb.helper.JedisHandler;
+import com.pb.helper.JedisManager;
 import com.pb.util.SerializeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
@@ -14,39 +16,21 @@ import redis.clients.jedis.Jedis;
  */
 @Service(protocol = {"dubbo"})
 public class RedisFacdeImpl implements RedisFacde {
-    Log log = LogFactory.getLog(RedisFacdeImpl.class);
+    Logger log = LoggerFactory.getLogger(RedisFacdeImpl.class);
 
     @Autowired
     JedisManager jedisManager;
 
     public boolean set(String key, Object value) {
-        return jedisManager.execute(new JedisHandler<Boolean>() {
-            @Override
-            public Boolean handle(Jedis jedis) {
-                jedis.set(key.getBytes(), SerializeUtil.serialize(value));
-                return true;
-            }
-        });
+        return jedisManager.set(key,value);
     }
 
     public <T> T get(String key) {
-        return jedisManager.execute(new JedisHandler<T>() {
-            @Override
-            public T handle(Jedis jedis) {
-                byte[] b = jedis.get(key.getBytes());
-                return (T)SerializeUtil.unserialize(b);
-            }
-        });
+        return jedisManager.get(key);
     }
 
     public boolean delete(String key) {
-        return jedisManager.execute(new JedisHandler<Boolean>() {
-            @Override
-            public Boolean handle(Jedis jedis) {
-                jedis.del(key);
-                return true;
-            }
-        });
+        return jedisManager.delete(key);
     }
 
 }

@@ -52,7 +52,7 @@ public class ObjectAndByteUtil {
     }
 
     public static void main(String[] args) {
-        Map<String,String> map = new HashMap<>();
+        Map<String,String> map = new HashMap<String,String>();
         map.put("ip","127.0.0.1");
         Map res = (Map)toObject( toByteArray(map));
         System.err.println(res);

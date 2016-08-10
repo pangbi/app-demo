@@ -22,7 +22,6 @@ public class ZKListener {
 
     public static void main(String args[]) {
         zk.subscribeChildChanges(ROOT_CONF_NODE, new IZkChildListener() {
-            @Override
             public void handleChildChange(String root, List<String> list) throws Exception {
                 System.out.println("=======subscribeChildChanges=====");
                 System.out.println(root);
@@ -33,14 +32,12 @@ public class ZKListener {
 
 
         zk.subscribeDataChanges(REDIS_NODE, new IZkDataListener() {
-            @Override
             public void handleDataChange(String s, Object o) throws Exception {
                 System.out.println("=======subscribeDataChanges=====");
                 System.out.println(s);
                 System.out.println(o);
             }
 
-            @Override
             public void handleDataDeleted(String s) throws Exception {
 
             }

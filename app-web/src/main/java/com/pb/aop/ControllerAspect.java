@@ -3,8 +3,8 @@ package com.pb.aop;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.pb.dto.Constants;
 import com.pb.facde.RedisFacde;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ import java.util.Map;
 @Component
 @Aspect
 public class ControllerAspect {
-    Log log = LogFactory.getLog(ControllerAspect.class);
+    Logger log = LoggerFactory.getLogger(ControllerAspect.class);
 
     @Reference
     private RedisFacde redisFacde;
@@ -38,8 +38,8 @@ public class ControllerAspect {
      */
     @Around("execution(* com.pb.controller.*.*(..))")
     public Object aroundAdvice(ProceedingJoinPoint pjp) throws Throwable {
-        System.out.println("-----aroundAdvice().invoke-----");
-        System.out.println(" 此处可以做类似于Before Advice的事情");
+       // System.out.println("-----aroundAdvice().invoke-----");
+       // System.out.println(" 此处可以做类似于Before Advice的事情");
         //开始时间
         long begin = System.currentTimeMillis();
         //调用核心逻辑
@@ -49,7 +49,7 @@ public class ControllerAspect {
         String clazzName = pjp.getTarget().getClass().getName();
         String methodName = pjp.getSignature().getName();
         log.debug(clazzName+"." + methodName + " runs " + (end - begin) + " ms");
-        Map<String,String> map = new HashMap<>();
+        Map<String,String> map = new HashMap<String,String>();
         String key = clazzName+"."+methodName;
         long time = (end - begin);
         map.put("action",key);
@@ -61,8 +61,8 @@ public class ControllerAspect {
         actionList.add(map);
         redisFacde.set(Constants.REDIS_ACTION_REQUEST,actionList);
 
-        System.out.println(" 此处可以做类似于After Advice的事情");
-        System.out.println("-----End of aroundAdvice()------");
+        //System.out.println(" 此处可以做类似于After Advice的事情");
+       // System.out.println("-----End of aroundAdvice()------");
         return retVal;
     }
 

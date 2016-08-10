@@ -5,8 +5,8 @@ import com.pb.bo.TestBo;
 import com.pb.dao.TestDao;
 import com.pb.dto.Constants;
 import com.pb.facde.RedisFacde;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ import java.util.*;
 @Service
 public class TestService {
 
-    private Log log = LogFactory.getLog(TestService.class);
+    private Logger log = LoggerFactory.getLogger(TestService.class);
 
     @Autowired
     private TestDao testDao;
@@ -70,7 +70,7 @@ public class TestService {
             if (actionMap.containsKey(key))
                 tempList = actionMap.get(key);
             else
-                tempList = new ArrayList<>();
+                tempList = new ArrayList<Long>();
             tempList.add(time);
             actionMap.put(key,tempList);
         }
@@ -94,7 +94,6 @@ public class TestService {
             actionTimeList.add(tempMap);
         }
         Collections.sort(actionTimeList,new Comparator<Map<String,String>>(){
-            @Override
             public int compare(Map<String, String> o1, Map<String, String> o2) {
                 return Integer.valueOf(o2.get("avgTime"))-Integer.valueOf(o1.get("avgTime"));
             }

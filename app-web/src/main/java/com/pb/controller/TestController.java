@@ -4,13 +4,11 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.pb.bo.TestBo;
 import com.pb.controller.base.BaseController;
 import com.pb.facde.TestFacde;
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +24,7 @@ import java.util.Map;
  */
 @Controller
 public class TestController extends BaseController {
-    private Log log = LogFactory.getLog(TestController.class);
+    private Logger log = LoggerFactory.getLogger(TestController.class);
 
     @Reference
     private TestFacde testFacde;
@@ -56,7 +54,7 @@ public class TestController extends BaseController {
 
     @RequestMapping("/doLogin")
     public void doLogin(String username, String password) throws ServletException, IOException {
-        Map<String,String> userInfo = new HashMap<>();
+        Map<String,String> userInfo = new HashMap<String,String>();
         userInfo.put("username",username);
         userInfo.put("password",password);
         super.session.setAttribute("userInfo",userInfo);

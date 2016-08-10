@@ -1,7 +1,7 @@
 package com.pb.controller.base;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
  * Created by zhangqiang on 2016/7/26.
  */
 public class BaseController {
-    Log log = LogFactory.getLog(BaseController.class);
+    Logger log = LoggerFactory.getLogger(BaseController.class);
     protected HttpServletRequest request;
     protected HttpServletResponse response;
     protected HttpSession session;
