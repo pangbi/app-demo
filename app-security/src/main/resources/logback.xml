@@ -2,8 +2,8 @@
 <configuration>
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
 		<filter class="com.pb.logHelper.ThresholdFilter">
-			<level>ERROR</level>
-			<appName>app-redis</appName>
+			<level>DEBUG</level>
+			<appName>app-security</appName>
 		</filter>
 		<encoder>
 			<pattern>%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n</pattern>
@@ -11,12 +11,12 @@
 	</appender>
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<filter class="com.pb.logHelper.ThresholdFilter">
-			<level>ERROR</level>
+			<level>DEBUG</level>
 			<appName>app-redis</appName>
 		</filter>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!--日志文件输出的文件名 -->
-			<FileNamePattern>D:/zq/java/app-demo/logs/app-redis.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<FileNamePattern>D:/zq/java/app-demo/logs/app-security.%d{yyyy-MM-dd}.log</FileNamePattern>
 			<MaxHistory>300</MaxHistory>
 		</rollingPolicy>
 		<layout class="ch.qos.logback.classic.PatternLayout">

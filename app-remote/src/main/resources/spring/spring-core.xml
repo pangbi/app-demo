@@ -55,6 +55,13 @@
 		<constructor-arg index="4" value="${redis.password}"/>
 	</bean>
 
+	<!--Druid 监控配置-->
+	<bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
+		<property name="slowSqlMillis" value="3000" /><!--满查询sql执行时间阀值-->
+		<property name="logSlowSql" value="true" />
+		<property name="mergeSql" value="true" />
+	</bean>
+
 	<!--jedisManager配置-->
 	<bean id="jedisManager" class="com.pb.helper.JedisManager" >
 		<property name="jedisPool" ref="jedisPool" />
@@ -77,6 +84,8 @@
 		<property name="maxWait" value="${mysql.maxWait}" />
 		<property name="testWhileIdle" value="true" />
 		<property name="validationQuery" value="${mysql.validationQuery}" />
+
+		<property name="filters" value="stat-filter" />
 	</bean>
 
 	<!-- SqlSessionFactoryBean  spring整合ibatis的入口 -->
@@ -143,5 +152,26 @@
 		<constructor-arg name="logPath" value="${dubbo.config.logConfig}" />     <!-- Zookeeper上你的应用所对应的节点路径 -->
 		<constructor-arg name="listener" ref="logConfig" />
 	</bean>
+
+
+	<!--方法监控-->
+	<bean id="druid-stat-interceptor"
+		  class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
+	</bean>
+
+	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"
+		  scope="prototype">
+		<property name="patterns">
+			<list>
+				<value>com.pb.service.*</value>
+				<value>com.pb.dao.*</value>
+			</list>
+		</property>
+	</bean>
+
+	<aop:config>
+		<aop:advisor advice-ref="druid-stat-interceptor"
+					 pointcut-ref="druid-stat-pointcut" />
+	</aop:config>
 
 </beans>
