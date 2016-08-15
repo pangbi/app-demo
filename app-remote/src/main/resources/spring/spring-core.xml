@@ -85,7 +85,7 @@
 		<property name="testWhileIdle" value="true" />
 		<property name="validationQuery" value="${mysql.validationQuery}" />
 
-		<property name="filters" value="stat-filter" />
+		<property name="filters" value="stat,stat-filter" /><!--stat 默认的sql监控-->
 	</bean>
 
 	<!-- SqlSessionFactoryBean  spring整合ibatis的入口 -->
