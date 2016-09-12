@@ -18,6 +18,8 @@
         <module>app-service</module>
         <module>app-resource-manager</module>
         <module>app-security</module>
+        <module>app-task</module>
+        <module>app-mq</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -55,6 +57,8 @@
         <logback.ext.spring.version>0.1.4</logback.ext.spring.version>
         <shiro.core.version>1.2.2</shiro.core.version>
         <junit.version>4.12</junit.version>
+        <quartz.version>2.2.1</quartz.version>
+        <quartz.job.version>2.2.1</quartz.job.version>
     </properties>
 
     <dependencyManagement>
@@ -80,6 +84,19 @@
                 <artifactId>shiro-core</artifactId>
                 <version>${shiro.core.version}</version>
             </dependency>
+
+            <!--quartz-->
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz-jobs</artifactId>
+                <version>${quartz.job.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
