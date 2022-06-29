@@ -46,7 +46,7 @@
         <standard.version>1.1.2</standard.version>
         <log4j.version>1.2.9</log4j.version>
         <servletApi.version>3.1.0</servletApi.version>
-        <zookeeper.version>3.4.8</zookeeper.version>
+        <zookeeper.version>3.4.14</zookeeper.version>
         <druid.version>1.0.18</druid.version>
         <mybatis.version>3.2.2</mybatis.version>
         <mybatis.spring.version>1.2.0</mybatis.spring.version>
